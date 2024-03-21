@@ -1,15 +1,15 @@
-import { BunFile } from "bun";
+import { appendFile } from "node:fs/promises";
 
 export class Logger {
-  private logFile: BunFile;
+  private destination: string;
 
   constructor(filePath: string) {
-    this.logFile = Bun.file(filePath);
+    this.destination = filePath;
   }
 
   async log(msg: string) {
     const date = new Date().toISOString();
     const logMsg = `[bunlsp] ${date} - ${msg}\n`;
-    await Bun.write(this.logFile, logMsg);
+    await appendFile(this.destination, logMsg);
   }
 }
