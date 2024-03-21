@@ -13,8 +13,9 @@ test("Test encode", () => {
 })
 
 test("Test decode", () => {
-  const incomingMessage = "Content-Length: 17\r\n\r\n{\"Method\":\"test\"}";
+  const incomingMessage = "Content-Length: 17\r\n\r\n{\"method\":\"test\"}";
   const decodedMessage = decodeMessage(incomingMessage);
+  const contentLength = decodedMessage.content.length;
   expect(decodedMessage.method).toBe("test");
-  expect(decodedMessage.length).toBe(17);
+  expect(contentLength).toBe(17);
 })
